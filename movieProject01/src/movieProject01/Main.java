@@ -32,7 +32,7 @@ public class Main {
 				switch (num) {
 					case 1:	//예매
 						System.out.println("<< 영화 예매 >>\n");
-						M.ticekt();
+						M.ticket();
 						break;
 					case 2:	//추천
 						System.out.println("<< 영화 추천 >>\n");

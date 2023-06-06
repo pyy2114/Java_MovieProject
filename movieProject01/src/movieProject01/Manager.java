@@ -5,7 +5,6 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Manager {
-	
 	String [][] movieList = {
 			{"범죄도시3","액션","범죄"},
 			{"분노의 질주","액션",""},
@@ -20,15 +19,19 @@ public class Manager {
 	};
 	
 	String []genreList= {"액션","범죄","드라마","애니메이션","뮤지컬","코미디","로맨스","멜로","어드벤쳐"};	
+	int [][] seat = new int[11][15];	
 	
 	//객체 생성
 	Scanner sc = new Scanner(System.in);
-	Ticket ticket = new Ticket();
+	Ticket t = new Ticket();
 	Movie m = new Movie();
+	
+	User u = new User();	//pyy
 
 	//리스트 생성
-	private ArrayList<Movie> movies = new ArrayList<>();
-	private ArrayList<String> genres = new ArrayList<>();	
+	ArrayList<Movie> movies = new ArrayList<>();
+	ArrayList<String> genres = new ArrayList<>();	
+	ArrayList<int[][]> seats = new ArrayList<>();
 	
 	//변수 설정
 	int num = 0;
@@ -40,6 +43,7 @@ public class Manager {
 		for(int i = 0; i < movieList.length; i++)
 		{
 			movies.add(new Movie(i+1,movieList[i][0],movieList[i][1],movieList[i][2]));
+			seats.add(new int[11][15]);//pyy
 		}
 
 		for(int i = 0; i < genreList.length; i++)
@@ -71,16 +75,32 @@ public class Manager {
 		System.out.println();
 	}
 
-//	public ArrayList<Movie> getMList(){
-//	return movies;
-//}
-//public ArrayList<String> getGList(){
-//	return genres;
-//}
-//	
+	public ArrayList<Movie> getMList(){
+		return movies;
+	}
+	public ArrayList<String> getGList(){
+			return genres;
+	}
+	public ArrayList<int[][]> getTList(){
+		return seats;
+	}
+
+	
 	// 은영
-	public void ticekt() {
-		ticket.ticketing();
+	public void ticket() {
+		//pyy
+		int mNum = 0;
+		int [][] mSeat = new int[11][15];
+		
+		System.out.print("영화 번호 선택: ");
+		mNum = sc.nextInt();
+		sc.nextLine();
+		
+		mSeat = seats.get(mNum);
+		
+		t.ticketing(u,mSeat);
+
+		
 	}
 	
 	//윤영
@@ -110,7 +130,7 @@ public class Manager {
 				i = sc.nextInt();
 				
 				if(i == 1) {
-					ticket.ticketing();
+					ticket();
 				}
 				else
 					return;
@@ -120,11 +140,11 @@ public class Manager {
 			recommand();
 		}
 		
+		
 	}
 	
 	//서현
 	public void confirm() {	
-		
 		
 	}
 
