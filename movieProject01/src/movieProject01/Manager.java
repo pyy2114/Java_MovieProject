@@ -64,9 +64,11 @@ public class Manager {
 		
 	}
 	public void displayMovieList() {
+		System.out.println("-----------------------------------------------");
 		for(Movie m : movies) {
 			System.out.println(m);
 		}
+		System.out.println("-----------------------------------------------\n");
 	}
 	public void displayGenreList() {
 		for(int i = 0; i < genres.size(); i++) {
@@ -92,14 +94,14 @@ public class Manager {
 		int mNum = 0;
 		int [][] mSeat = new int[11][15];
 		
+		displayMovieList();
 		System.out.print("영화 번호 선택: ");
 		mNum = sc.nextInt();
 		sc.nextLine();
 		
 		mSeat = seats.get(mNum);
 		
-		t.ticketing(u,mSeat);
-
+		t.ticketing(u,mSeat,movieList[mNum][0]);
 		
 	}
 	
@@ -121,7 +123,14 @@ public class Manager {
 				System.out.println("\n선택하신 장르의 영화 목록입니다.");
 				for(Movie m : movies) {
 					if((genres.get(num-1) == m.genre[0])||(genres.get(num-1) == m.genre[1])){
-						System.out.println(m);
+						//System.out.println(m);
+						System.out.print(m.movieNum + "." + m.title + "\t   ");
+						if(genres.get(num-1) == m.genre[0]) {
+							System.out.println("\u001B[43m" + m.genre[0] + "\u001B[0m" + " / "+ m.genre[1]  + "\u001B[0m");
+						}
+						else {
+							System.out.println(m.genre[0] +" / "+ "\u001B[43m" + m.genre[1] + "\u001B[0m" );
+						}
 					}
 				}
 				System.out.println();
@@ -131,6 +140,7 @@ public class Manager {
 				
 				if(i == 1) {
 					ticket();
+					
 				}
 				else
 					return;
@@ -145,7 +155,7 @@ public class Manager {
 	
 	//서현
 	public void confirm() {	
-		
+		u.information();
 	}
 
 

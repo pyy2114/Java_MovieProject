@@ -23,15 +23,15 @@ public class Ticket {
 	//pyy
 	public Ticket() {}
 	
-	public void ticketing(User u,int [][]seat) {//pyy
+	public void ticketing(User u,int [][]seat, String movietitle) {//pyy
 
-		//rnumber();  //비밀번호 확인
 		System.out.print("예약할 인원 수를 입력하세요: ");
 		p_number = sc.nextInt();
 		
 		while(true) {
 			sc.nextLine();
 			PrintSeat(seat);	//pyy
+			System.out.printf("좌석 이름 입력: ");
 			strings = checkList();   //중복 입력 확인.
 			if(strings.length == p_number) {
 				for(int i = 0;i<strings.length;i++) {
@@ -54,9 +54,10 @@ public class Ticket {
 		}
 		rnumber();
 		
-		System.out.println("예약이 완료 되었습니다.");
 		PrintSeat(seat);	//pyy
-		u.setUser(r_array.get(p), movietitle, strings);
+		System.out.println("예약이 완료 되었습니다.");
+
+		u.setUser(r_array.get(p), movietitle, strings,p_number);
 	}
 	
 	public boolean checkSeat(String[] strings) {
@@ -114,7 +115,7 @@ public class Ticket {
 		boolean b = false;
 
 		while (a == true) {
-
+			System.out.printf("비밀번호 입력: ");
 			r_number = sc.next();
 
 			while (true) {
@@ -124,7 +125,6 @@ public class Ticket {
 					for (int index = 0; index < r_array.size(); index++) {
 
 						if (r_number.equals(r_array.get(index))) {
-							//System.out.println("no1, index is " + index + " and thing is "+ r_array.get(index));
 							System.out.println("이미 사용중인 비밀번호입니다. 다른 비밀번호를 입력해주세요.");
 							break;
 						}
@@ -132,12 +132,10 @@ public class Ticket {
 						else {
 
 							if (index != (r_array.size() - 1)) {
-								//System.out.println("no2, index is " + index + " and thing is "+ r_array.get(index));
 								continue;
 							}
 
 							else {
-								//System.out.println("no3, index is " + index +" and thing is "+ r_array.get(index));
 								System.out.println("사용 가능한 비밀번호입니다.");
 								a = false;
 								b = true;
@@ -147,28 +145,20 @@ public class Ticket {
 						}
 						
 					}
-					}
-				
-				else System.out.println("비밀번호는 4자리입니다. 다시 입력해주세요."); break;
+				}
+				else { 
+					System.out.println("비밀번호는 4자리입니다. 다시 입력해주세요."); 
+				}
+				break;
 
 			}
 			if (b == true) {p++; r_array.add(r_number);}
-			
-			/*System.out.println("array size is" + r_array.size());
-			
-			for (int aa = 0; aa < r_array.size(); aa++) {
-				System.out.println(aa + "번째 원소는 " + r_array.get(aa));
-			}*/
+
 		}
 	}
-	/*public void setTicket(User u, int a) {
-		u.moviename = this.movietitle;
-		u.strings = this.strings;  //여러명 들어간 배열
-		u.p_number = this.p_number; //배열 출력을 위한 인원수 
-		u.number = this.r_array.get(a); 
-	}*/
 	
 	public void PrintSeat(int [][]seat) {	//pyy
+		System.out.println("\n\t<<좌석 배치도>>\n");
 		System.out.println(" 1 2 3 4 5 6 7 8 9 101112131415");
 		for(i=0;i<11;i++) {
 			System.out.print((char)(i+65)+" ");

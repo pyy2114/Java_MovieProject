@@ -19,6 +19,6 @@ public class Movie {
 	
 	@Override
 	public String toString() {
-		return this.movieNum + "." + this.title + "\t" + this.genre[0] +" / "+ this.genre[1];
+		return this.movieNum + "." + this.title + "\t   " + this.genre[0] +" / "+ this.genre[1];
 	}
 }

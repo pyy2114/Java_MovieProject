@@ -11,10 +11,6 @@ public class Main {
 				
 		Scanner sc = new Scanner(System.in);
 		Manager M = new Manager();
-		
-//@@@@@@@@@@@TEST@@@@@@@@@@@@///////////	
-//		M.displayMovieList();
-//		M.displayGenreList();
 
 		do {
 			try {
@@ -31,16 +27,16 @@ public class Main {
 				}
 				switch (num) {
 					case 1:	//예매
-						System.out.println("<< 영화 예매 >>\n");
+						System.out.println("\n<< 영화 예매 >>\n");
 						M.ticket();
 						break;
 					case 2:	//추천
-						System.out.println("<< 영화 추천 >>\n");
+						System.out.println("\n<< 영화 추천 >>\n");
 						M.displayGenreList();
 						M.recommand();
 						break;
 					case 3:	//확인
-						System.out.println("<< 예매 확인 >>\n");
+						System.out.println("\n<< 예매 확인 >>\n");
 						M.confirm();
 						break;
 					default:	//끝
@@ -50,7 +46,8 @@ public class Main {
 				System.out.println("잘못 입력했습니다.");
 			}		
 		}while(num != 4);
-			System.out.println("끝");
+		
+		System.out.println("<< 이용해 주셔서 갑사합니다 >>");
 		
 		
 	}
