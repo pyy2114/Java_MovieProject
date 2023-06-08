@@ -11,7 +11,7 @@ public class Manager {
 			{"마리오 브라더스","애니메이션","어드벤쳐"},
 			{"인어공주","뮤지컬","드라마"},
 			{"가디언즈 오브 갤럭시","액션","코미디"},
-			{"아기공룡 둘리: 얼음별 대모험 리마스터링","애니메이션","어드벤쳐"},
+			{"아기공룡 둘리:얼음별 대모험 리마스터링","애니메이션","어드벤쳐"},
 			{"슬픔의 삼각형","드라마","코미디"},
 			{"남은 인생의 10년","로맨스","멜로"},
 			{"존 윅4","액션",""},
@@ -25,8 +25,7 @@ public class Manager {
 	Scanner sc = new Scanner(System.in);
 	Ticket t = new Ticket();
 	Movie m = new Movie();
-	
-	User u = new User();	//pyy
+	User u = new User();	
 
 	//리스트 생성
 	ArrayList<Movie> movies = new ArrayList<>();
@@ -43,7 +42,7 @@ public class Manager {
 		for(int i = 0; i < movieList.length; i++)
 		{
 			movies.add(new Movie(i+1,movieList[i][0],movieList[i][1],movieList[i][2]));
-			seats.add(new int[11][15]);//pyy
+			seats.add(new int[11][15]);
 		}
 
 		for(int i = 0; i < genreList.length; i++)
@@ -64,11 +63,11 @@ public class Manager {
 		
 	}
 	public void displayMovieList() {
-		System.out.println("-----------------------------------------------");
+		System.out.println("----------------------------------------------------");
 		for(Movie m : movies) {
-			System.out.println(m);
+			System.out.printf("%2s. %-25s \t%5s/%s\n",m.movieNum,m.title,m.genre[0],m.genre[1]);
 		}
-		System.out.println("-----------------------------------------------\n");
+		System.out.println("----------------------------------------------------\n");
 	}
 	public void displayGenreList() {
 		for(int i = 0; i < genres.size(); i++) {
@@ -76,36 +75,22 @@ public class Manager {
 		}
 		System.out.println();
 	}
-
-	public ArrayList<Movie> getMList(){
-		return movies;
-	}
-	public ArrayList<String> getGList(){
-			return genres;
-	}
-	public ArrayList<int[][]> getTList(){
-		return seats;
-	}
-
 	
-	// 은영
 	public void ticket() {
-		//pyy
 		int mNum = 0;
 		int [][] mSeat = new int[11][15];
 		
 		displayMovieList();
 		System.out.print("영화 번호 선택: ");
-		mNum = sc.nextInt();
+		mNum = (sc.nextInt())-1;
 		sc.nextLine();
-		
+		System.out.println(movieList[mNum][0] + "를 예매합니다. ");
 		mSeat = seats.get(mNum);
 		
 		t.ticketing(u,mSeat,movieList[mNum][0]);
 		
 	}
 	
-	//윤영
 	public void recommand() {
 		
 		int i = 0;
@@ -123,14 +108,7 @@ public class Manager {
 				System.out.println("\n선택하신 장르의 영화 목록입니다.");
 				for(Movie m : movies) {
 					if((genres.get(num-1) == m.genre[0])||(genres.get(num-1) == m.genre[1])){
-						//System.out.println(m);
-						System.out.print(m.movieNum + "." + m.title + "\t   ");
-						if(genres.get(num-1) == m.genre[0]) {
-							System.out.println("\u001B[43m" + m.genre[0] + "\u001B[0m" + " / "+ m.genre[1]  + "\u001B[0m");
-						}
-						else {
-							System.out.println(m.genre[0] +" / "+ "\u001B[43m" + m.genre[1] + "\u001B[0m" );
-						}
+						System.out.println(m);
 					}
 				}
 				System.out.println();
@@ -140,7 +118,6 @@ public class Manager {
 				
 				if(i == 1) {
 					ticket();
-					
 				}
 				else
 					return;
@@ -153,7 +130,6 @@ public class Manager {
 		
 	}
 	
-	//서현
 	public void confirm() {	
 		u.information();
 	}

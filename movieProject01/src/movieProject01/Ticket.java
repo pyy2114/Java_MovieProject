@@ -8,10 +8,9 @@ import java.util.Scanner;
 public class Ticket {
 	ArrayList<String> r_array = new ArrayList<String>(Arrays.asList("0"));
 	
-	int [][] seat = new int[11][15];
 	char row;
 	int col;
-	int i,j,k;
+	int k;
 	int p = 0;
 	String r_number;
 	int p_number = 0;
@@ -20,19 +19,17 @@ public class Ticket {
 	Scanner sc = new Scanner(System.in);
 	String[] strings;
 	
-	//pyy
 	public Ticket() {}
 	
-	public void ticketing(User u,int [][]seat, String movietitle) {//pyy
+	public void ticketing(User u,int [][]seat, String movietitle) {
 
 		System.out.print("예약할 인원 수를 입력하세요: ");
 		p_number = sc.nextInt();
-		
+		sc.nextLine();		
 		while(true) {
-			sc.nextLine();
-			PrintSeat(seat);	//pyy
+			PrintSeat(seat);	
 			System.out.printf("좌석 이름 입력: ");
-			strings = checkList();   //중복 입력 확인.
+			strings = checkList(seat);   //중복 입력 확인.
 			if(strings.length == p_number) {
 				for(int i = 0;i<strings.length;i++) {
 					row = strings[i].charAt(0);
@@ -52,15 +49,16 @@ public class Ticket {
 				continue;
 			}
 		}
+		
 		rnumber();
 		
-		PrintSeat(seat);	//pyy
+		PrintSeat(seat);	
 		System.out.println("예약이 완료 되었습니다.");
 
 		u.setUser(r_array.get(p), movietitle, strings,p_number);
 	}
 	
-	public boolean checkSeat(String[] strings) {
+	public boolean checkSeat(String[] strings,int [][]seat) {
 		int checkfalse = 0;
 		for(int i=0;i<strings.length;) {
 			row = strings[i].charAt(0);
@@ -78,12 +76,15 @@ public class Ticket {
 			}
 			i++;
 		}
-		if(checkfalse>0)
+
+		if(checkfalse>0) {
+			System.out.printf("좌석 입력: ");
 			return false;
+		}
 		return true;
 	}
 	
-	public String[] checkList() {    //중복 입력 체크
+	public String[] checkList(int [][]seat) {    //중복 입력 체크
 		while(true) {
 			String inputLine = sc.nextLine();
 			String[] strings = inputLine.split(",");
@@ -97,7 +98,7 @@ public class Ticket {
 	            }
 	         }
 	         if (!check) {
-	             if(checkSeat(strings)) {
+	             if(checkSeat(strings,seat)) {
 	            	 return strings;
 	             }
 	             else
@@ -157,12 +158,12 @@ public class Ticket {
 		}
 	}
 	
-	public void PrintSeat(int [][]seat) {	//pyy
+	public void PrintSeat(int [][]seat) {	
 		System.out.println("\n\t<<좌석 배치도>>\n");
 		System.out.println(" 1 2 3 4 5 6 7 8 9 101112131415");
-		for(i=0;i<11;i++) {
+		for(int i=0;i<11;i++) {
 			System.out.print((char)(i+65)+" ");
-			for(j=0;j<15;j++) {
+			for(int j=0;j<15;j++) {
 				if(seat[i][j] == 0)
 					System.out.print("□ ");
 				else if(seat[i][j] == 1)
